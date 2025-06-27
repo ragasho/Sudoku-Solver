@@ -1,0 +1,3 @@
+com\example\sudoku\service\SudokuService.class
+com\example\sudoku\controller\SudokuController.class
+com\example\sudoku\SudokuApplication.class
