@@ -50,7 +50,7 @@ const SudokuSolver = () => {
 
     const handleSolve = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/sudoku/solve", {
+      const response = await fetch("https://sudoku-solver-noo0.onrender.com/api/sudoku/solve", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(board)
