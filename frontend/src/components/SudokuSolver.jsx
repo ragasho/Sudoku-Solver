@@ -63,10 +63,11 @@ const SudokuSolver = () => {
   };
 
     return (
-        <div className="flex flex-col items-center mt-8">
-            <h2 className="text-4xl font-extrabold text-center mb-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-transparent bg-clip-text drop-shadow-md animate-pulse">
-                🧠 Sudoku Solver
+        <div className=" min-h-screen flex flex-col items-center justify-start mt-8">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-center text-indigo-700 drop-shadow-md">
+                Sudoku Solver
             </h2>
+
             <p className="text-center text-gray-600 text-lg mb-6">
                 Enter the Sudoku you want to solve
             </p>
@@ -88,6 +89,7 @@ const SudokuSolver = () => {
 
                         return (
                             <input
+                                inputMode={"numeric"}
                                 key={`${i}-${j}`}
                                 ref={inputRefs.current[i][j]}
                                 className={`w-12 h-12 text-center text-xl bg-white rounded shadow-inner
@@ -137,7 +139,6 @@ const SudokuSolver = () => {
             </div>
         </div>
     );
-
 };
 
 export default SudokuSolver;
