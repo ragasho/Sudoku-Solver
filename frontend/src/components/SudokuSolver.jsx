@@ -49,18 +49,25 @@ const SudokuSolver = () => {
 
 
     const handleSolve = async () => {
-    try {
-      const response = await fetch("https://sudoku-solver-fn7j.onrender.com/api/sudoku/solve", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(board)
-      });
-      const data = await response.json();
-      setSolvedBoard(data);
-    } catch (error) {
-      alert("Error solving Sudoku");
-    }
-  };
+        try {
+            const response = await fetch("https://sudoku-solver-fn7j.onrender.com/api/sudoku/solve", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(board),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text(); // backend sends plain text for error
+                throw new Error(errorText || "Failed to solve Sudoku");
+            }
+
+            const data = await response.json();
+            setSolvedBoard(data);
+        } catch (error) {
+            alert("❌ Enter a valid Sudoku board"); // or show in UI
+        }
+    };
+
 
     return (
         <div className=" min-h-screen flex flex-col items-center justify-start mt-8">
@@ -110,19 +117,17 @@ const SudokuSolver = () => {
             </div>
 
             {/* Buttons */}
-            <div className="mt-6 flex gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-2 mt-6 justify-center">
                 {solvedBoard ? (
                     <button
                         onClick={() => setSolvedBoard(null)}
-                        className="px-5 py-2 bg-yellow-500 hover:bg-yellow-600 text-white font-medium rounded shadow transition-all"
-                    >
+                        className="px-4 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded shadow text-sm sm:text-base">
                         Unsolve
                     </button>
                 ) : (
                     <button
                         onClick={handleSolve}
-                        className="px-5 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded shadow transition-all"
-                    >
+                        className="px-5 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded shadow transition-all">
                         Solve
                     </button>
                 )}
